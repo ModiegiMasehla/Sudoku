@@ -94,7 +94,18 @@ Example of `sudoku solve puzzles/first-year.txt --explain`:
   top, so whole games can be tested with scripted input.
 - **`cli.py`**: `argparse` front end with clear errors and exit codes.
 
+## What changed from v1
 
+| v1 problem | Fix |
+| --- | --- |
+| Printed "Solved Puzzle" and saved a grid that still had empty cells | Complete backtracking solver; unsolvable puzzles raise a clear error |
+| Hard puzzles (e.g. `puzzles/hard.txt`) were never solved | Solved in about 0.3 s |
+| A non-digit in the file crashed with a raw `ValueError` | `ParseError` with a readable message |
+| Rule-breaking grids (two 5s in a row) were silently accepted | Detected and reported with the exact cells |
+| File names hard-coded | Command-line interface |
+| Candidates recomputed thousands of times per pass | Computed once per lookup |
+| 3x3 separators were dead code | Real box separators and coordinates |
+| No tests | 91 tests, run on Python 3.9 to 3.13 in CI |
 
 ## Development
 
